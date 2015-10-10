@@ -18,36 +18,9 @@ public class Spaceship {
     this.bullets = new ArrayList<Bullet>();
   }
 
-  public void checkCollisions(Asteroids asteroids) {
-    checkPlayerAsteroidCollisions(asteroids);
-    checkBulletAsteroidCollisions(asteroids);
-  }
-
-  public void checkPlayerAsteroidCollisions(Asteroids asteroids) {
-    for (Iterator<Asteroid> iterator = asteroids.asteroids.iterator (); iterator.hasNext(); ) {
-      Asteroid asteroid = iterator.next();
-      if (rectangleCollided(x, y, spaceship.width - 50, spaceship.height, asteroid.x - asteroid.artwork.width / 2, asteroid.y - asteroid.artwork.height / 2, asteroid.artwork.width, asteroid.artwork.height)) {
-        iterator.remove();
-        fuel.reduce();
-      }
-    }
-  }
-
-  public void checkBulletAsteroidCollisions(Asteroids asteroids) {
-    for (Iterator<Bullet> iterator = bullets.iterator (); iterator.hasNext(); ) {
-      Bullet bullet = iterator.next();
-      for (Iterator<Asteroid> iterator2 = asteroids.asteroids.iterator (); iterator2.hasNext(); ) {
-        Asteroid asteroid = iterator2.next();
-        if (rectangleCollided(bullet.x, bullet.y, bullet.artwork.width, bullet.artwork.height, asteroid.x - asteroid.artwork.width / 2, asteroid.y - asteroid.artwork.height / 2, asteroid.artwork.width, asteroid.artwork.height)) {
-          iterator.remove();
-          iterator2.remove();
-          //increase score
-        }
-      }
-    }
-  }
-
-  public void update() {
+  public void update(Asteroids asteroids) {
+    playerAsteroidCollisions(asteroids);
+    bulletAsteroidCollisions(asteroids);
     for (Bullet bullet : bullets) {
       bullet.update();
     }
@@ -89,8 +62,8 @@ public class Spaceship {
 
   public void moveRight() {
     x += speed;
-    if (x > width - spaceship.width) {
-      x = width - spaceship.width;
+    if (x > spaceship.width) {
+      x = spaceship.width;
     }
   }
 
@@ -105,6 +78,39 @@ public class Spaceship {
   public void mousePressed() {
     Bullet bullet = new Bullet(x + 252, y + 57);
     bullets.add(bullet);
+  }
+
+  public void playerAsteroidCollisions(Asteroids asteroids) {
+    ArrayList<Asteroid> removedAsteroids = new ArrayList<Asteroid>();
+    for (Asteroid asteroid : asteroids.asteroids) {
+      if (collided(x, y, spaceship.width - 50, spaceship.height, asteroid.x - asteroid.artwork.width / 2, asteroid.y - asteroid.artwork.height / 2, asteroid.artwork.width, asteroid.artwork.height)) {
+        removedAsteroids.add(asteroid);
+        fuel.reduce();
+      }
+    }
+    for (Asteroid asteroid : removedAsteroids) {
+      asteroids.asteroids.remove(asteroid);
+    }
+  }
+
+  public void bulletAsteroidCollisions(Asteroids asteroids) {
+    ArrayList<Asteroid> removedAsteroids = new ArrayList<Asteroid>();
+    ArrayList<Bullet> removedBullets = new ArrayList<Bullet>();
+    for (Asteroid asteroid : asteroids.asteroids) {
+      for (Bullet bullet : bullets) {
+        if (collided(bullet.x, bullet.y, bullet.artwork.width, bullet.artwork.height, asteroid.x - asteroid.artwork.width / 2, asteroid.y - asteroid.artwork.height / 2, asteroid.artwork.width, asteroid.artwork.height)) {
+          removedAsteroids.add(asteroid);
+          removedBullets.add(bullet);
+          gameplay.addScore(asteroid);
+        }
+      }
+    }
+    for (Asteroid asteroid : removedAsteroids) {
+      asteroids.asteroids.remove(asteroid);
+    }
+    for (Bullet bullet : removedBullets) {
+      bullets.remove(bullet);
+    }
   }
 }
 

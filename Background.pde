@@ -1,15 +1,15 @@
-public class ScrollingBackground {
+public class Background {
 
   private PImage background;
   private float x;
 
-  public ScrollingBackground() {
+  public Background() {
     background = loadImage("mainmenu_background.png");
     x = 0;
   }
 
   public void update() {
-     x = x < -width ? 0 : x - 3;
+     x = x < -width ? 0 : x - 4;
   }
 
   public void draw() {

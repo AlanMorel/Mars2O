@@ -2,11 +2,10 @@ public class Asteroids {
 
   public ArrayList<Asteroid> asteroids;
 
-  private int minX;
-  private int maxX;
-
-  private int minY;
-  private int maxY;
+  private int spawnX;
+  private int spawnWidth;
+  private int spawnY;
+  private int spawnHeight;
 
   private float angle;
   private float delay;
@@ -15,14 +14,13 @@ public class Asteroids {
 
   public PImage artwork;
 
-  public Asteroids(int minX, int maxX, int minY, int maxY, float angle, float delay) {
+  public Asteroids(int spawnX, int spawnWidth, int spawnY, int spawnHeight, float angle, float delay) {
     this.asteroids = new ArrayList<Asteroid>();
     
-    this.minX = minX;
-    this.maxX = maxX;
-    
-    this.minY = minY;
-    this.maxY = maxY;
+    this.spawnX = spawnX;
+    this.spawnWidth = spawnWidth;
+    this.spawnY = spawnY;
+    this.spawnHeight = spawnHeight;
     
     this.angle = angle;
     this.delay = delay;
@@ -55,8 +53,8 @@ public class Asteroids {
   }
 
   private void spawn() {
-    float x = random(minX, maxX);
-    float y = random(minY, maxY);
+    float x = random(spawnX, spawnWidth);
+    float y = random(spawnY, spawnHeight);
     float speed = random(2, 5);
     float ang = angle + random(-5, 5);
 

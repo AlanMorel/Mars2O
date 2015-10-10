@@ -6,8 +6,6 @@ public class Bullet {
   
   private PImage artwork;
 
-  private ArrayList<Bullet> bullets;
-
   public Bullet(float x, float y) {
     this.x = x;
     this.y = y;
