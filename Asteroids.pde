@@ -12,8 +12,6 @@ public class Asteroids {
 
   private int now;
 
-  public PImage artwork;
-
   public Asteroids(int spawnX, int spawnWidth, int spawnY, int spawnHeight, float angle, float delay) {
     this.asteroids = new ArrayList<Asteroid>();
     
@@ -25,10 +23,7 @@ public class Asteroids {
     this.angle = angle;
     this.delay = delay;
     
-    this.now = millis();
-    
-    this.artwork = loadImage("asteroid_small.png");
-    
+    this.now = millis(); 
     this.spawn();
   }
 
@@ -47,6 +42,7 @@ public class Asteroids {
   }
 
   public void draw() {
+    text("Asteroids on the screen: " + asteroids.size(), 1000, 100);
     for (Asteroid asteroid : asteroids) {
       asteroid.draw();
     }
@@ -55,10 +51,9 @@ public class Asteroids {
   private void spawn() {
     float x = random(spawnX, spawnWidth);
     float y = random(spawnY, spawnHeight);
-    float speed = random(2, 5);
-    float ang = angle + random(-5, 5);
-
-    Asteroid asteroid = new Asteroid(x, y, ang, speed, artwork);
+    float ang = angle + random(-10, 10);
+    
+    Asteroid asteroid = new Asteroid(x, y, ang);
     asteroids.add(asteroid);
   }
 }
