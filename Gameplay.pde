@@ -5,6 +5,7 @@ public class Gameplay {
   private Spaceship spaceship;
   private Background background;
   private Asteroids asteroids;
+  private Canisters canisters;
   private Timeline timeline;
 
   private int score;
@@ -14,6 +15,7 @@ public class Gameplay {
     spaceship = new Spaceship(40, 50);
     background = new Background();
     asteroids = new Asteroids(width + 100, width + 100, 0, height - 100, -180, 200);
+    canisters = new Canisters(width + 50, width + 50, 0, height - 100, -180, 5000);
     timeline = new Timeline();
     score = 0;
     start = millis();
@@ -28,15 +30,16 @@ public class Gameplay {
   public void update() {
     background.update();
     timeline.update();
+    asteroids.update();
+    canisters.update();
     spaceship.update(asteroids);
   }
 
   public void draw() {
+    
     background.draw();
-
-    asteroids.update();
     asteroids.draw();
-
+    canisters.draw();
     spaceship.draw();
     timeline.draw();
     

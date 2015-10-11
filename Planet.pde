@@ -3,8 +3,7 @@ public class Planet {
   private PImage art;
   private float angle;
   
-  private float x;
-  private float y;
+  private float x, y;
 
   private float increment;
 

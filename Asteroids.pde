@@ -1,30 +1,10 @@
-public class Asteroids {
+public class Asteroids extends Spawner {
 
   public ArrayList<Asteroid> asteroids;
 
-  private int spawnX;
-  private int spawnWidth;
-  private int spawnY;
-  private int spawnHeight;
-
-  private float angle;
-  private float delay;
-
-  private int now;
-
   public Asteroids(int spawnX, int spawnWidth, int spawnY, int spawnHeight, float angle, float delay) {
+    super(spawnX, spawnWidth, spawnY, spawnHeight, angle, delay);
     this.asteroids = new ArrayList<Asteroid>();
-    
-    this.spawnX = spawnX;
-    this.spawnWidth = spawnWidth;
-    this.spawnY = spawnY;
-    this.spawnHeight = spawnHeight;
-    
-    this.angle = angle;
-    this.delay = delay;
-    
-    this.now = millis(); 
-    this.spawn();
   }
 
   public void update() {
@@ -34,13 +14,6 @@ public class Asteroids {
     checkNewSpawn();
   }
 
-  private void checkNewSpawn() {
-    if (millis() - now >= delay) {
-      spawn();
-      now = millis();
-    }
-  }
-
   public void draw() {
     text("Asteroids on the screen: " + asteroids.size(), 1000, 100);
     for (Asteroid asteroid : asteroids) {
@@ -48,12 +21,10 @@ public class Asteroids {
     }
   }
 
-  private void spawn() {
-    float x = random(spawnX, spawnWidth);
-    float y = random(spawnY, spawnHeight);
+  public void spawn() {
     float ang = angle + random(-10, 10);
     
-    Asteroid asteroid = new Asteroid(x, y, ang);
+    Asteroid asteroid = new Asteroid(random(x, w), random(y, h), ang);
     asteroids.add(asteroid);
   }
 }

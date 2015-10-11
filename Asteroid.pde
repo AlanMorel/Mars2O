@@ -1,19 +1,10 @@
 public class Asteroid {
 
-  public float x;
-  public float y;
-
-  public float angle;
-
-  public float rotationAngle;
-  public float rotationSpeed;
-
-  public int hp;
-
-  public float speed;
+  public float x, y;
+  public float angle, speed;
+  public float rotationAngle, rotationSpeed;
+  public int hp, size;
   private PImage artwork;
-
-  private int size;
 
   public Asteroid(float x, float y, float angle) {
     this.x = x;

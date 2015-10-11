@@ -1,11 +1,8 @@
 public class ShootingStar {
 
-  private float x;
-  private float y;
+  private float x, y;
+  private float angle, speed;
   
-  private float angle;
-  
-  private float speed;
   private PImage artwork;
 
   public ShootingStar(float x, float y, float angle, float speed) {

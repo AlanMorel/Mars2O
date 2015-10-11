@@ -1,7 +1,6 @@
 public class Spaceship {
 
-  private float x;
-  private float y;
+  private float x, y;
   private float speed;
 
   private PImage spaceship;
