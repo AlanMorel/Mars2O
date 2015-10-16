@@ -59,19 +59,19 @@ public class Asteroid {
     size = 2;
   }
 
-  public boolean isSmall(){
+  public boolean isSmall() {
     return size == 0;
   }
-  
-  public boolean isMedium(){
+
+  public boolean isMedium() {
     return size == 1;
   }
 
-  public boolean isLarge(){
+  public boolean isLarge() {
     return size == 2;
   }
-  
-  public boolean isDestroyed(){
+
+  public boolean isDestroyed() {
     return --hp <= 0;
   }
 

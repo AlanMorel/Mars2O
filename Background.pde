@@ -9,7 +9,7 @@ public class Background {
   }
 
   public void update() {
-     x = x < -width ? 0 : x - 4;
+    x = x < -width ? 0 : x - 4;
   }
 
   public void draw() {

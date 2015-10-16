@@ -4,7 +4,7 @@ public class Timeline {
   private PImage mars;
   private PImage spaceship;
   private PImage highlight;
-  
+
   private float progress;
 
   public Timeline() {

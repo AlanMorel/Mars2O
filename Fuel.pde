@@ -1,5 +1,5 @@
 public class Fuel {
-  
+
   private PImage fuelbar;
   private int fuel;
   private int now;
@@ -12,6 +12,11 @@ public class Fuel {
 
   public int getFuelLeft() {
     return fuel;
+  }
+
+  public void increment() {
+    fuel += 10;
+    fixFuel();
   }
 
   public void reduce() {

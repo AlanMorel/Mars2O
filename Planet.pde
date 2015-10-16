@@ -2,7 +2,7 @@ public class Planet {
 
   private PImage art;
   private float angle;
-  
+
   private float x, y;
 
   private float increment;
@@ -15,7 +15,7 @@ public class Planet {
     this.angle = 0;
   }
 
-  public void update(){
+  public void update() {
     angle += increment;
   }
 

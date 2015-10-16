@@ -23,7 +23,7 @@ public class Asteroids extends Spawner {
 
   public void spawn() {
     float ang = angle + random(-10, 10);
-    
+
     Asteroid asteroid = new Asteroid(random(x, w), random(y, h), ang);
     asteroids.add(asteroid);
   }

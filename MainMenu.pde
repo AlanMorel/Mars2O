@@ -23,13 +23,13 @@ public class MainMenu {
 
   public void draw() {
     image(background, 0, 0);
-    
+
     earth.draw();
     moon.draw();
     mars.draw();
     asteroids.draw();
     shootingStar.draw();
-    
+
     image(screen, 0, 0);
     image(title, 310, 150);
   }

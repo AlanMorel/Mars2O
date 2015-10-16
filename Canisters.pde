@@ -15,7 +15,7 @@ public class Canisters extends Spawner {
   }
 
   public void draw() {
-    text("Canisters on the screen: " + canisters.size(), 1000, 200);
+    text("Canisters on the screen: " + canisters.size(), 1000, 150);
     for (Canister canister : canisters) {
       canister.draw();
     }
@@ -23,7 +23,7 @@ public class Canisters extends Spawner {
 
   public void spawn() {
     float ang = angle + random(-10, 10);
-    
+
     Canister canister = new Canister(random(x, w), random(y, h), ang);
     canisters.add(canister);
   }

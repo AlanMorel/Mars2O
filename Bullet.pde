@@ -1,8 +1,8 @@
 public class Bullet {
-  
+
   private float x, y;
   private float speed;
-  
+
   private PImage artwork;
 
   public Bullet(float x, float y) {
@@ -12,7 +12,7 @@ public class Bullet {
     this.artwork = loadImage("bullet.png");
   }
 
-  public void update(){
+  public void update() {
     x += speed;
   }
 
