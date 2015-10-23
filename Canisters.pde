@@ -1,9 +1,11 @@
 public class Canisters extends Spawner {
 
   public ArrayList<Canister> canisters;
+  public PImage reference;
 
-  public Canisters(int spawnX, int spawnWidth, int spawnY, int spawnHeight, float angle, float delay) {
+  public Canisters(PImage ref, int spawnX, int spawnWidth, int spawnY, int spawnHeight, float angle, float delay) {
     super(spawnX, spawnWidth, spawnY, spawnHeight, angle, delay);
+    this.reference = ref;
     this.canisters = new ArrayList<Canister>();
   }
 
@@ -24,7 +26,7 @@ public class Canisters extends Spawner {
   public void spawn() {
     float ang = angle + random(-10, 10);
 
-    Canister canister = new Canister(random(x, w), random(y, h), ang);
+    Canister canister = new Canister(reference, random(x, w), random(y, h), ang);
     canisters.add(canister);
   }
 }

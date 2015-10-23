@@ -8,13 +8,15 @@ public class Canister {
   public float rotationSpeed;
 
   private PImage artwork;
-
-  public Canister(float x, float y, float angle) {
+  public int sizeW = 124;
+  public int sizeH = 125;
+  
+  public Canister(PImage ref, float x, float y, float angle) {
     this.x = x;
     this.y = y;
     this.angle = angle;
     this.rotationAngle = 0;
-    this.artwork = loadImage("canister.png");
+    this.artwork = ref;
     this.speed = random(2, 4);
     this.rotationSpeed = random(1, 3);
   }
@@ -35,7 +37,8 @@ public class Canister {
     imageMode(CENTER);
     rotate(radians(rotationAngle));
     fill(128);
-    image(artwork, 0, 0);
+    copy(artwork,105, 1049, 124, 125,0,0,sizeW, sizeH);
+//    image(artwork, 0, 0);
     popMatrix();
     imageMode(CORNERS);
   }

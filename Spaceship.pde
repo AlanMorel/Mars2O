@@ -1,18 +1,20 @@
 public class Spaceship {
 
   public float x, y;
-  private float speed;
+  private int speed;
+  private int sizeW = 240; 
+  private int sizeH = 115;
 
   public PImage spaceship;
   private Fuel fuel;
 
   private ArrayList<Bullet> bullets;
 
-  public Spaceship(float x, float y) {
+  public Spaceship(PImage ref, float x, float y) {
     this.x = x;
     this.y = y;
     this.speed = 4;
-    this.spaceship = loadImage("spaceship.png");
+    this.spaceship = ref;
     this.fuel = new Fuel();
     this.bullets = new ArrayList<Bullet>();
   }
@@ -45,8 +47,8 @@ public class Spaceship {
 
   public void moveDown() {
     y += speed;
-    if (y > height - spaceship.height) {
-      y = height - spaceship.height;
+    if (y > height - sizeH) {
+      y = height - sizeH;
     }
   }
 
@@ -59,14 +61,17 @@ public class Spaceship {
 
   public void moveRight() {
     x += speed;
-    if (x > spaceship.width) {
-      x = spaceship.width;
+    if (x > sizeW) {
+      x = sizeW;
     }
   }
 
   public void draw() {
     text("Bullets on the screen: " + bullets.size(), 1000, 125);
-    image(spaceship, x, y);
+    pushMatrix();
+    translate(x,y);
+    copy(spaceship,1162, 1372, 460, 147, 0, 0, 240, 115);
+    popMatrix();
     for (Bullet bullet : bullets) {
       bullet.draw();
     }

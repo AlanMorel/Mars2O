@@ -1,5 +1,6 @@
 public class Gameplay {
 
+  public PImage spriteSheetG; 
   private static final int SECONDS_TO_REACH_EARTH = 60;
 
   private Spaceship spaceship;
@@ -12,10 +13,11 @@ public class Gameplay {
   private int start;
 
   public Gameplay() {
-    spaceship = new Spaceship(50, 50);
+    spriteSheetG = loadImage("Mars20SpriteSheet.png");
+    spaceship = new Spaceship(spriteSheetG, 50, 50);
     background = new Background();
-    asteroids = new Asteroids(width + 100, width + 100, 0, height - 100, -180, 200);
-    canisters = new Canisters(width + 50, width + 50, 0, height - 100, -180, 5000);
+    asteroids = new Asteroids(spriteSheetG, width + 100, width + 100, 0, height - 100, -180, 3000);
+    canisters = new Canisters(spriteSheetG, width + 50, width + 50, 0, height - 100, -180, 5000);
     timeline = new Timeline();
     score = 0;
     start = millis();
@@ -45,7 +47,7 @@ public class Gameplay {
 
     background.draw();
     asteroids.draw();
-    canisters.draw();
+//    canisters.draw();
     spaceship.draw();
     timeline.draw();
 
@@ -59,9 +61,11 @@ public class Gameplay {
   public void addScore(Asteroid asteroid) {
     if (asteroid.isSmall()) {
       score += 5;
-    } else if (asteroid.isMedium()) {
-      score += 25;
-    } else {
+    }
+//    else if (asteroid.isMedium()) {
+//      score += 25;
+//    } 
+    else {
       score += 100;
     }
   }
@@ -72,12 +76,12 @@ public class Gameplay {
 
     for (Asteroid asteroid : asteroids.asteroids) {
       //If the asteroid has exited the screen, remove it and move on
-      if (asteroid.x + asteroid.artwork.width < 0 || asteroid.y + asteroid.artwork.height < 0 || asteroid.y - asteroid.artwork.height > height) {
+      if (asteroid.x + asteroid.sizeW < 0 || asteroid.y + asteroid.sizeH < 0 || asteroid.y - asteroid.sizeH > height) {
         removedAsteroids.add(asteroid);
         continue;
       }
       //Otherwise, if it collided with the player, if so, remove it and reduce fuel
-      if (collided(spaceship.x, spaceship.y, spaceship.spaceship.width - 50, spaceship.spaceship.height, asteroid.x - asteroid.artwork.width / 2, asteroid.y - asteroid.artwork.height / 2, asteroid.artwork.width, asteroid.artwork.height)) {
+      if (collided(spaceship.x, spaceship.y, spaceship.sizeW - 50, spaceship.sizeH, asteroid.x - asteroid.sizeH / 2, asteroid.y - asteroid.sizeH / 2, asteroid.sizeW, asteroid.sizeH)) {
         removedAsteroids.add(asteroid);
         spaceship.fuel.reduce();
       }
@@ -102,7 +106,7 @@ public class Gameplay {
           continue;
         }
         //Otheriwse, if a bullet and asteroid collided, remove both and increment score
-        if (collided(bullet.x, bullet.y, bullet.artwork.width, bullet.artwork.height, asteroid.x - asteroid.artwork.width / 2, asteroid.y - asteroid.artwork.height / 2, asteroid.artwork.width, asteroid.artwork.height)) {
+        if (collided(bullet.x, bullet.y, bullet.artwork.width, bullet.artwork.height, asteroid.x - asteroid.sizeW / 2, asteroid.y - asteroid.sizeH / 2, asteroid.sizeW, asteroid.sizeH)) {
           removedBullets.add(bullet);
           if (asteroid.isDestroyed()) {
             gameplay.addScore(asteroid);
@@ -127,12 +131,12 @@ public class Gameplay {
 
     for (Canister canister : canisters.canisters) {
       //If the canister has exited the screen, remove it and move on
-      if (canister.x + canister.artwork.width < 0 || canister.y + canister.artwork.height < 0 || canister.y - canister.artwork.height > height) {
+      if (canister.x + canister.sizeW < 0 || canister.y + canister.sizeH < 0 || canister.y - canister.sizeH > height) {
         removedCanisters.add(canister);
         continue;
       }
       //Otherwise, if it collided with the player, if so, remove it and add fuel
-      if (collided(spaceship.x, spaceship.y, spaceship.spaceship.width - 50, spaceship.spaceship.height, canister.x - canister.artwork.width / 2, canister.y - canister.artwork.height / 2, canister.artwork.width, canister.artwork.height)) {
+      if (collided(spaceship.x, spaceship.y, spaceship.sizeW - 50, spaceship.sizeH, canister.x - canister.sizeW / 2, canister.y - canister.sizeH / 2, canister.sizeW, canister.sizeH)) {
         removedCanisters.add(canister);
         spaceship.fuel.increment();
       }
@@ -152,7 +156,7 @@ public class Gameplay {
     for (Canister canister : canisters.canisters) {
       for (Bullet bullet : spaceship.bullets) {
         //Otheriwse, if a bullet and asteroid collided, remove both and increment score
-        if (collided(bullet.x, bullet.y, bullet.artwork.width, bullet.artwork.height, canister.x - canister.artwork.width / 2, canister.y - canister.artwork.height / 2, canister.artwork.width, canister.artwork.height)) {
+        if (collided(bullet.x, bullet.y, bullet.artwork.width, bullet.artwork.height, canister.x - canister.sizeW / 2, canister.y - canister.sizeH / 2, canister.sizeW, canister.sizeH)) {
           removedBullets.add(bullet);
           //Call explosion here
           removedCanisters.add(canister);

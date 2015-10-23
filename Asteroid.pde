@@ -1,16 +1,20 @@
 public class Asteroid {
 
   public float x, y;
-  public float angle, speed;
-  public float rotationAngle, rotationSpeed;
-  public int hp, size;
+  public float angle,speed;
+  public int hp, sizeW, sizeH, size;
   private PImage artwork;
+  private int sy = 112;
+  private int countFrame = 1;
+  private int switcher = 0;
+//  private int count= 0;
+  private int rotater;
 
-  public Asteroid(float x, float y, float angle) {
+  public Asteroid(PImage ref, float x, float y, float angle) {
     this.x = x;
     this.y = y;
     this.angle = angle;
-    this.rotationAngle = 0;
+    this.artwork = ref;
     setSize();
   }
 
@@ -20,41 +24,32 @@ public class Asteroid {
 
     x += dx;
     y += dy;
-
-    rotationAngle += rotationSpeed;
   }
 
   private void setSize() {
     float rand = random(0, 100);
     if (rand < 85) {
       setSmall();
-    } else if (rand < 99) {
-      setMedium();
-    } else {
+    } 
+    else {
       setLarge();
     }
   }
 
   public void setSmall() {
-    artwork = loadImage("asteroid_small.png");
+    sizeW = 127/2;
+    sizeH =128/2;
     speed = random(3, 5);
-    rotationSpeed = random(1, 5);
+    rotater = int(random(2, 5));
     hp = 1;
     size = 0;
   }
 
-  public void setMedium() {
-    artwork = loadImage("asteroid_medium.png");
-    speed = random(2, 3);
-    rotationSpeed = random(1, 3);
-    hp = 2;
-    size = 1;
-  }
-
   public void setLarge() {
-    artwork = loadImage("asteroid_large.png");
+    sizeW = 127 *2;
+    sizeH = 128 *2; 
     speed = random(1, 2);
-    rotationSpeed = random(0, 1);
+    rotater = int(random(2, 8));
     hp = 3;
     size = 2;
   }
@@ -63,9 +58,6 @@ public class Asteroid {
     return size == 0;
   }
 
-  public boolean isMedium() {
-    return size == 1;
-  }
 
   public boolean isLarge() {
     return size == 2;
@@ -74,14 +66,34 @@ public class Asteroid {
   public boolean isDestroyed() {
     return --hp <= 0;
   }
+  
+  public void display(){
+   if (countFrame == 4 ){
+      countFrame = 0;
+      sy = 112;
+    }
+    //get sx sy   
+    copy(artwork, 105, sy, 127, 128, 0,0, sizeW, sizeH);
+    if (frameCount%rotater == 0){
+      if(switcher == 1){
+        switcher = 0;
+      } else{
+        switcher = 1;
+      }
+    }
+    if (switcher == 1){
+      sy = sy + 234;
+      countFrame++;
+      switcher = 0;
+    }
+  }
 
   public void draw() {
     pushMatrix();
     translate(x, y);
     imageMode(CENTER);
-    rotate(radians(rotationAngle));
     fill(128);
-    image(artwork, 0, 0);
+    display();
     popMatrix();
     imageMode(CORNERS);
   }

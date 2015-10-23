@@ -28,7 +28,7 @@ void draw() {
 
 void mousePressed() {
   if (status == Status.MAIN_MENU) {
-    mainMenu.mousePressed();
+    mainMenu.changeState();
   } else if (status == Status.GAME_PLAY) {
     gameplay.mousePressed();
   }
