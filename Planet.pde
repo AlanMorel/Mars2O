@@ -3,12 +3,18 @@ public class Planet {
   private PImage art;
   private float angle;
 
-  private float x, y;
+  private int sx, sy, sw, sh, x, y, dw, dh;
 
   private float increment;
 
-  public Planet(String artwork, int x, int y, float increment) {
-    this.art = loadImage(artwork + ".png");
+  public Planet(int sx, int sy, int sw, int sh, int x, int y, float increment) {
+    this.art = loadImage("Mars20SpriteSheet.png");
+    this.sx = sx;
+    this.sy = sy;
+    this.sw = sw;
+    this.sh = sh;
+    this.dh = sh / 2;
+    this. dw = sw/ 2;
     this.x = x;
     this.y = y;
     this.increment = increment;
@@ -25,7 +31,7 @@ public class Planet {
     imageMode(CENTER);
     rotate(radians(sin(angle)));
     fill(128);
-    image(art, 0, 0);
+    copy(art,sx, sy, sw, sh, x, y, dw, dh);
     popMatrix();
     imageMode(CORNERS);
   }
