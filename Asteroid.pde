@@ -74,18 +74,18 @@ public class Asteroid {
     }
     //get sx sy   
     copy(artwork, 105, sy, 127, 128, 0,0, sizeW, sizeH);
-    if (frameCount%rotater == 0){
-      if(switcher == 1){
-        switcher = 0;
-      } else{
-        switcher = 1;
-      }
-    }
-    if (switcher == 1){
-      sy = sy + 234;
-      countFrame++;
-      switcher = 0;
-    }
+//    if (frameCount%rotater == 0){
+//      if(switcher == 1){
+//        switcher = 0;
+//      } else{
+//        switcher = 1;
+//      }
+//    }
+//    if (switcher == 1){
+//      sy = sy + 234;
+//      countFrame++;
+//      switcher = 0;
+//    }
   }
 
   public void draw() {
