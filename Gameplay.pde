@@ -12,10 +12,10 @@ public class Gameplay {
   private int score;
   private int start;
 
-  public Gameplay() {
+  public Gameplay(PImage sprites) {
     font = createFont("ARCADECLASSIC.TTF", 24);
     textFont(font);
-    spriteSheetG = loadImage("Mars20SpriteSheet.png");
+    spriteSheetG = sprites;
     spaceship = new Spaceship(spriteSheetG, 50, 50);
     background = new Background(true);
     asteroids = new Asteroids(spriteSheetG, width + 100, width + 100, 0, height - 100, -180, 3000);

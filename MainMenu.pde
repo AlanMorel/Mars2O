@@ -15,9 +15,9 @@ public class MainMenu {
   private Bttn exit;
   private Asteroid test;
 
-  public MainMenu() {
-    spriteSheet = loadImage("Mars20SpriteSheet.png");
-    menuItems = loadImage("Mars20Buttons&Text.png");
+  public MainMenu(PImage sprites, PImage menu) {
+    spriteSheet = sprites;
+    menuItems = menu;
     space = new Background(false);
     mars = new Planet(spriteSheet, 1293, 612, 431, 422, 150, 200, 0.05);
     earth = new Planet(spriteSheet, 1172, 15, 563, 550, 1075, 450, 0.1);
@@ -56,8 +56,9 @@ public class MainMenu {
 
   public void changeState() {
     if (play.clicked()){
-      gameplay = new Gameplay();
-      status = Status.GAME_PLAY;
+//      gameplay = new Gameplay();
+      cutscene_1 = new Cutscene1(spriteSheet, menuItems);
+      status = Status.CUTSCENE_1;
     }
     if (exit.clicked()){
       exit();
