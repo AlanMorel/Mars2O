@@ -4,10 +4,10 @@ public class Asteroid {
   public float angle,speed;
   public int hp, sizeW, sizeH, size;
   private PImage artwork;
+  private PImage frames[];
   private int sy = 112;
-  private int countFrame = 1;
+  private int countFrame = 0;
   private int switcher = 0;
-//  private int count= 0;
   private int rotater;
 
   public Asteroid(PImage ref, float x, float y, float angle) {
@@ -16,6 +16,12 @@ public class Asteroid {
     this.angle = angle;
     this.artwork = ref;
     setSize();
+    
+    this.frames = new PImage[4];
+    for (int i= 0; i < 4; i++){
+      frames[i] = ref.get(105, sy, 127, 128);
+      sy = sy + 234;
+    }
   }
 
   public void update() {
@@ -70,22 +76,22 @@ public class Asteroid {
   public void display(){
    if (countFrame == 4 ){
       countFrame = 0;
-      sy = 112;
     }
-    //get sx sy   
-    copy(artwork, 105, sy, 127, 128, 0,0, sizeW, sizeH);
-//    if (frameCount%rotater == 0){
-//      if(switcher == 1){
-//        switcher = 0;
-//      } else{
-//        switcher = 1;
-//      }
-//    }
-//    if (switcher == 1){
-//      sy = sy + 234;
-//      countFrame++;
-//      switcher = 0;
-//    }
+    if (frameCount%rotater == 0){
+      if(switcher == 1){
+        switcher = 0;
+      } else{
+        switcher = 1;
+      }
+    }
+    if (switcher == 1){
+      image(frames[countFrame], x, y, sizeW, sizeH);
+      countFrame++;
+      switcher = 0;
+    }
+    else{
+      image(frames[countFrame], x, y, sizeW, sizeH);
+    }
   }
 
   public void draw() {

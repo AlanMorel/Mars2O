@@ -13,6 +13,7 @@ public class MainMenu {
   private ShootingStar shootingStar;
   private Bttn play;
   private Bttn exit;
+  private Asteroid test;
 
   public MainMenu() {
     spriteSheet = loadImage("Mars20SpriteSheet.png");
