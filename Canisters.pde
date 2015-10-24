@@ -17,7 +17,8 @@ public class Canisters extends Spawner {
   }
 
   public void draw() {
-    text("Canisters on the screen: " + canisters.size(), 1000, 150);
+    textSize(24);
+    text("Canisters   on   the   screen      " + canisters.size(), 850, 150);
     for (Canister canister : canisters) {
       canister.draw();
     }

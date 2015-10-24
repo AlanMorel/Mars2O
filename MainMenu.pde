@@ -2,10 +2,10 @@ public class MainMenu {
   
   public PImage spriteSheet;
   private PImage menuItems; 
-  private PImage [] background;
   private int timer = 0;
   private int switcher = 0;
   
+  private Background space;
   private Planet mars;
   private Planet earth;
   private Moon moon;
@@ -18,9 +18,7 @@ public class MainMenu {
   public MainMenu() {
     spriteSheet = loadImage("Mars20SpriteSheet.png");
     menuItems = loadImage("Mars20Buttons&Text.png");
-    background = new PImage[2];
-    background[0] =loadImage("mainmenu_background.png");
-    background[1] = loadImage("mainmenu_background_2.png");
+    space = new Background(false);
     mars = new Planet(spriteSheet, 1293, 612, 431, 422, 150, 200, 0.05);
     earth = new Planet(spriteSheet, 1172, 15, 563, 550, 1075, 450, 0.1);
     moon = new Moon(spriteSheet);
@@ -30,26 +28,9 @@ public class MainMenu {
     exit = new Bttn(menuItems, 76, 395, 134, 32, 383, 400, 134, 32, 359);
   }
 
-  public void pickBackground(){
-   if (switcher == 0){
-      image(background[0],0,0);
-    }
-    else{
-      image(background[1],0,0);
-    }
-    timer++;
-    if(timer%50 == 0){
-      if (switcher == 1){
-        switcher = 0;
-      }
-      else{
-        switcher = 1;
-      }
-    }
-  }
   
   public void draw() {
-    pickBackground();
+    space.draw();
     earth.draw();
     moon.draw();
     mars.draw();

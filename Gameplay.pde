@@ -1,8 +1,8 @@
 public class Gameplay {
 
   public PImage spriteSheetG; 
+  public PFont font;
   private static final int SECONDS_TO_REACH_EARTH = 60;
-
   private Spaceship spaceship;
   private Background background;
   private Asteroids asteroids;
@@ -13,12 +13,14 @@ public class Gameplay {
   private int start;
 
   public Gameplay() {
+    font = createFont("ARCADECLASSIC.TTF", 24);
+    textFont(font);
     spriteSheetG = loadImage("Mars20SpriteSheet.png");
     spaceship = new Spaceship(spriteSheetG, 50, 50);
-    background = new Background();
+    background = new Background(true);
     asteroids = new Asteroids(spriteSheetG, width + 100, width + 100, 0, height - 100, -180, 3000);
     canisters = new Canisters(spriteSheetG, width + 50, width + 50, 0, height - 100, -180, 5000);
-    timeline = new Timeline();
+    timeline = new Timeline(spriteSheetG);
     score = 0;
     start = millis();
   }
@@ -51,7 +53,8 @@ public class Gameplay {
     spaceship.draw();
     timeline.draw();
 
-    text("Score: " + score, 1000, 75);
+    textSize(24);
+    text("Score     " + score, 850, 75);
   }
 
   public void mousePressed() {
@@ -106,7 +109,7 @@ public class Gameplay {
           continue;
         }
         //Otheriwse, if a bullet and asteroid collided, remove both and increment score
-        if (collided(bullet.x, bullet.y, bullet.artwork.width, bullet.artwork.height, asteroid.x - asteroid.sizeW / 2, asteroid.y - asteroid.sizeH / 2, asteroid.sizeW, asteroid.sizeH)) {
+        if (collided(bullet.x, bullet.y, bullet.artwork[3].width, bullet.artwork[3].height, asteroid.x - asteroid.sizeW / 2, asteroid.y - asteroid.sizeH / 2, asteroid.sizeW, asteroid.sizeH)) {
           removedBullets.add(bullet);
           if (asteroid.isDestroyed()) {
             gameplay.addScore(asteroid);
@@ -156,7 +159,7 @@ public class Gameplay {
     for (Canister canister : canisters.canisters) {
       for (Bullet bullet : spaceship.bullets) {
         //Otheriwse, if a bullet and asteroid collided, remove both and increment score
-        if (collided(bullet.x, bullet.y, bullet.artwork.width, bullet.artwork.height, canister.x - canister.sizeW / 2, canister.y - canister.sizeH / 2, canister.sizeW, canister.sizeH)) {
+        if (collided(bullet.x, bullet.y, bullet.artwork[3].width, bullet.artwork[3].height, canister.x - canister.sizeW / 2, canister.y - canister.sizeH / 2, canister.sizeW, canister.sizeH)) {
           removedBullets.add(bullet);
           //Call explosion here
           removedCanisters.add(canister);

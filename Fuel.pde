@@ -48,7 +48,7 @@ public class Fuel {
 
     fill(255, 255, 255);
     textSize(18); 
-    text("Fuel left: " + fuel + "%", 25, 635);
+    text("Fuel left " + fuel, 25, 635);
   }
 }
 

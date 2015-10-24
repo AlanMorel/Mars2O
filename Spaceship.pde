@@ -2,21 +2,31 @@ public class Spaceship {
 
   public float x, y;
   private int speed;
-  private int sizeW = 240; 
-  private int sizeH = 115;
+  private int sizeW = 225;
+  private int sizeH= 105;
 
-  public PImage spaceship;
+  public PImage art;
+  public PImage [] bulletArt;
+  public PImage passer;
   private Fuel fuel;
 
   private ArrayList<Bullet> bullets;
 
   public Spaceship(PImage ref, float x, float y) {
+    this.passer = ref;
     this.x = x;
     this.y = y;
     this.speed = 4;
-    this.spaceship = ref;
+    this.art = ref.get(1162, 1372, 460, 147);
     this.fuel = new Fuel();
     this.bullets = new ArrayList<Bullet>();
+    // populate bullet Art
+    bulletArt = new PImage[4];
+    int sx = 111;
+    for (int i = 0; i < 4; i++){
+      bulletArt[i] = ref.get(sx, 505, 119, 52);
+      sx = sx + 119;
+    }
   }
 
   public void update() {
@@ -67,10 +77,11 @@ public class Spaceship {
   }
 
   public void draw() {
-    text("Bullets on the screen: " + bullets.size(), 1000, 125);
+    textSize(24);
+    text("Bullets   on   the   screen      " + bullets.size(), 850, 125);
     pushMatrix();
     translate(x,y);
-    copy(spaceship,1162, 1372, 460, 147, 0, 0, 240, 115);
+    image(art, 0, 0, sizeW, sizeH);
     popMatrix();
     for (Bullet bullet : bullets) {
       bullet.draw();
@@ -79,7 +90,8 @@ public class Spaceship {
   }
 
   public void mousePressed() {
-    Bullet bullet = new Bullet(x + 252, y + 57);
+//    Bullet bullet = new Bullet(art, x + 252, y + 57);
+    Bullet bullet = new Bullet(bulletArt, x, y);
     bullets.add(bullet);
   }
 }

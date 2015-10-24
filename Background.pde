@@ -1,10 +1,14 @@
 public class Background {
 
-  private PImage background;
+  private PImage [ ]background;
   private float x;
+  private boolean move = false;
 
-  public Background() {
-    background = loadImage("mainmenu_background.png");
+  public Background(boolean move) {
+    this.move = move;
+    background = new PImage[2];
+    background[0] = loadImage("mainmenu_background.png");
+    background[1] = loadImage("mainmenu_background_2.png");
     x = 0;
   }
 
@@ -13,8 +17,11 @@ public class Background {
   }
 
   public void draw() {
-    image(background, x, 0);
-    image(background, x + width, 0);
+    image(background[frameCount%100 < 50 ? 0:1], 0, 0);
+    if(move){
+    image(background[frameCount%100 < 50 ? 0:1], x, 0);
+    image(background[frameCount%100 < 50 ? 0:1], x + width, 0);
+    }
   }
 }
 

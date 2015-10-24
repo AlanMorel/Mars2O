@@ -46,7 +46,12 @@ public class Asteroid {
     sizeW = 127/2;
     sizeH =128/2;
     speed = random(3, 5);
-    rotater = int(random(2, 5));
+    if (speed > 4){
+      rotater = 3;
+    }
+    else{
+      rotater = int(speed + 2);
+    }
     hp = 1;
     size = 0;
   }
@@ -55,7 +60,7 @@ public class Asteroid {
     sizeW = 127 *2;
     sizeH = 128 *2; 
     speed = random(1, 2);
-    rotater = int(random(4, 8));
+    rotater = int(random(5, 8));
     hp = 3;
     size = 2;
   }

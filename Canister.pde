@@ -37,7 +37,7 @@ public class Canister {
     imageMode(CENTER);
     rotate(radians(rotationAngle));
     fill(128);
-    image(artwork, -sizeW/2, -sizeH/2,sizeW, sizeH);
+    image(artwork, 0, 0, sizeW, sizeH);
 //    image(artwork, 0, 0);
     popMatrix();
     imageMode(CORNERS);

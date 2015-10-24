@@ -24,7 +24,6 @@ public class Planet {
 
   public void update() {
     angle += increment;
-    print(angle);
   }
 
   public void draw() {
