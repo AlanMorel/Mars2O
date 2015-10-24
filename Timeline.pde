@@ -25,7 +25,7 @@ public class Timeline {
     image(mars, 800, 650, 860, 710);
     image(spaceship, 850 + progress, 665, 920 + progress, 700);
     //For testing purposes
-    text((int) (gameplay.getTripLeft() * 100) + "%", 1000, 675);
+    text((int) (gameplay.getTripLeft() * 100), 1000, 675);
   }
 }
 

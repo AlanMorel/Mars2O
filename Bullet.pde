@@ -7,7 +7,7 @@ public class Bullet {
   private PImage [] artwork;
 
   public Bullet(PImage [] ref, float x, float y) {
-    this.x = x;
+    this.x = x + 60;
     this.y = y + 65;
     this.speed = 6;
     this.artwork = new PImage[4];

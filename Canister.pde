@@ -7,18 +7,26 @@ public class Canister {
   public float rotationAngle;
   public float rotationSpeed;
 
-  private PImage artwork;
+  private PImage [] artwork;
   public int sizeW = 124;
   public int sizeH = 125;
+  public int frame = 0;
+  public boolean hit = false;
   
   public Canister(PImage ref, float x, float y, float angle) {
     this.x = x;
     this.y = y;
     this.angle = angle;
     this.rotationAngle = 0;
-    this.artwork = ref.get(105, 1049, 124, 125);
+    int sx = 105;
+    this.artwork = new PImage[9];
+    for(int i = 0; i < 9; i++){
+      artwork[i] = ref.get(sx, 1049, 124, 125);
+      sx = sx + 113;
+    }
+    ref.get(105, 1049, 124, 125);
     this.speed = random(2, 4);
-    this.rotationSpeed = random(1, 3);
+    this.rotationSpeed = random(1,3);
   }
 
   public void update() {
@@ -30,6 +38,9 @@ public class Canister {
 
     rotationAngle += rotationSpeed;
   }
+  
+  
+
 
   public void draw() {
     pushMatrix();
@@ -37,10 +48,27 @@ public class Canister {
     imageMode(CENTER);
     rotate(radians(rotationAngle));
     fill(128);
-    image(artwork, 0, 0, sizeW, sizeH);
-//    image(artwork, 0, 0);
+    image(artwork[frame], 0, 0, sizeW, sizeH);
+    if(hit == true){
+      if (frame < 8){
+        frame++;
+      }
+    }
     popMatrix();
     imageMode(CORNERS);
+  }
+  
+  public void hit(){
+      hit = true;
+  }
+  
+  public boolean collectable(){
+    if (frame == 8){
+      return false;
+    }
+    else{
+      return true;
+    }
   }
 }
 

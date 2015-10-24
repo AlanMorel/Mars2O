@@ -3,11 +3,13 @@ public class Asteroid {
   public float x, y;
   public float angle,speed;
   public int hp, sizeW, sizeH, size;
+  public boolean hit = false;
   private PImage artwork;
-  private PImage frames[];
-  private int sy = 112;
-  private int countFrame = 0;
+  private PImage frames[][];
+  private int rowFrame = 0;
+  private int colFrame = 0;
   private int switcher = 0;
+//  private int countFrame;
   private int rotater;
 
   public Asteroid(PImage ref, float x, float y, float angle) {
@@ -16,11 +18,15 @@ public class Asteroid {
     this.angle = angle;
     this.artwork = ref;
     setSize();
-    
-    this.frames = new PImage[4];
-    for (int i= 0; i < 4; i++){
-      frames[i] = ref.get(105, sy, 127, 128);
-      sy = sy + 234;
+    int sy = 112;
+    this.frames = new PImage[4][6];
+    for (int row= 0; row < 4; row++){
+      int sx = 105;
+      for(int col = 0; col < 6; col++){
+        frames[row][col] = ref.get(sx, sy, 120, 122);
+        sx = sx + 120;
+      }
+      sy = sy + 235;
     }
   }
 
@@ -47,10 +53,10 @@ public class Asteroid {
     sizeH =128/2;
     speed = random(3, 5);
     if (speed > 4){
-      rotater = 3;
+      rotater = 4;
     }
     else{
-      rotater = int(speed + 2);
+      rotater = int(speed + 4);
     }
     hp = 1;
     size = 0;
@@ -79,9 +85,10 @@ public class Asteroid {
   }
   
   public void display(){
-   if (countFrame == 4 ){
-      countFrame = 0;
+   if (rowFrame == 4 ){
+      rowFrame = 0;
     }
+    
     if (frameCount%rotater == 0){
       if(switcher == 1){
         switcher = 0;
@@ -89,16 +96,45 @@ public class Asteroid {
         switcher = 1;
       }
     }
+    
     if (switcher == 1){
-      image(frames[countFrame], 0, 0, sizeW, sizeH);
-      countFrame++;
-      switcher = 0;
+      if (rowFrame < 4){ 
+        image(frames[rowFrame][colFrame], 0, 0, sizeW, sizeH);
+        rowFrame++;
+        switcher = 0;
+      }
     }
     else{
-      image(frames[countFrame], 0, 0, sizeW, sizeH);
+      image(frames[rowFrame][colFrame], 0, 0, sizeW, sizeH);
+    }
+    
+    
+    if(hit){
+      if (colFrame < 5){
+        colFrame++;
+      }
+    }
+       
+  }
+  
+  public void hit(){
+      hit = true;
+  }
+  
+  public void hitBig(){
+    if(colFrame < 2 ){
+      colFrame++;
     }
   }
-
+  
+  public boolean damage(){
+    if (colFrame == 5){
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
   public void draw() {
     pushMatrix();
     translate(x, y);
