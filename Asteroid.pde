@@ -55,7 +55,7 @@ public class Asteroid {
     sizeW = 127 *2;
     sizeH = 128 *2; 
     speed = random(1, 2);
-    rotater = int(random(2, 8));
+    rotater = int(random(4, 8));
     hp = 3;
     size = 2;
   }
@@ -85,12 +85,12 @@ public class Asteroid {
       }
     }
     if (switcher == 1){
-      image(frames[countFrame], x, y, sizeW, sizeH);
+      image(frames[countFrame], 0, 0, sizeW, sizeH);
       countFrame++;
       switcher = 0;
     }
     else{
-      image(frames[countFrame], x, y, sizeW, sizeH);
+      image(frames[countFrame], 0, 0, sizeW, sizeH);
     }
   }
 

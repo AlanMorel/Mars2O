@@ -9,7 +9,6 @@ public class Planet {
   private float increment;
 
   public Planet(PImage ref, int sx, int sy, int sw, int sh, int x, int y, float increment) {
-    this.art = ref;
     this.sx = sx;
     this.sy = sy;
     this.sw = sw;
@@ -20,10 +19,12 @@ public class Planet {
     this.y = y;
     this.increment = increment;
     this.angle = 0;
+    this.art = ref.get(sx, sy, sh, sw);
   }
 
   public void update() {
     angle += increment;
+    print(angle);
   }
 
   public void draw() {
@@ -32,7 +33,7 @@ public class Planet {
     imageMode(CENTER);
     rotate(radians(sin(angle)));
     fill(128);
-    copy(art ,sx, sy, sw, sh, x, y, dw, dh);
+    image(art, 0, 0, dh, dw);
     popMatrix();
     imageMode(CORNERS);
   }

@@ -47,7 +47,7 @@ public class Gameplay {
 
     background.draw();
     asteroids.draw();
-//    canisters.draw();
+    canisters.draw();
     spaceship.draw();
     timeline.draw();
 

@@ -21,8 +21,8 @@ public class MainMenu {
     background = new PImage[2];
     background[0] =loadImage("mainmenu_background.png");
     background[1] = loadImage("mainmenu_background_2.png");
-    mars = new Planet(spriteSheet, 1293, 612, 431, 422, 25, 45, 0.05);
-    earth = new Planet(spriteSheet, 1172, 15, 563, 550, 475, 155, 0.1);
+    mars = new Planet(spriteSheet, 1293, 612, 431, 422, 150, 200, 0.05);
+    earth = new Planet(spriteSheet, 1172, 15, 563, 550, 1075, 450, 0.1);
     moon = new Moon(spriteSheet);
     asteroids = new Asteroids(spriteSheet, 700, 950, -200, -200, 120, 1000);
     shootingStar = new ShootingStar(spriteSheet, -100, 0, 5, 12);

@@ -16,7 +16,7 @@ public class Canister {
     this.y = y;
     this.angle = angle;
     this.rotationAngle = 0;
-    this.artwork = ref;
+    this.artwork = ref.get(105, 1049, 124, 125);
     this.speed = random(2, 4);
     this.rotationSpeed = random(1, 3);
   }
@@ -37,7 +37,7 @@ public class Canister {
     imageMode(CENTER);
     rotate(radians(rotationAngle));
     fill(128);
-    copy(artwork,105, 1049, 124, 125, -sizeW/2, -sizeH/2,sizeW, sizeH);
+    image(artwork, -sizeW/2, -sizeH/2,sizeW, sizeH);
 //    image(artwork, 0, 0);
     popMatrix();
     imageMode(CORNERS);
