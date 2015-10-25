@@ -15,6 +15,10 @@ public class Background {
   public void update() {
     x = x < -width ? 0 : x - 4;
   }
+  
+  public void setMove(){
+    move = true;
+  }
 
   public void draw() {
     image(background[frameCount%100 < 50 ? 0:1], 0, 0);

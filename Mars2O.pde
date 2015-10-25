@@ -36,8 +36,8 @@ void draw() {
 void mousePressed() {
   if (status == Status.MAIN_MENU) {
     mainMenu.changeState();
-  }else if (status == Status.CUTSCENE_1){
-    cutscene_1.changeState();
+//  }else if (status == Status.CUTSCENE_1){
+//    cutscene_1.changeState();
   } else if (status == Status.GAME_PLAY) {
     gameplay.mousePressed();
   }

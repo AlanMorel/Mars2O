@@ -18,8 +18,8 @@ public class Gameplay {
     spriteSheetG = sprites;
     spaceship = new Spaceship(spriteSheetG, 50, 50);
     background = new Background(true);
-    asteroids = new Asteroids(spriteSheetG, width + 100, width + 100, 0, height - 100, -180, 3000);
-    canisters = new Canisters(spriteSheetG, width + 50, width + 50, 0, height - 100, -180, 5000);
+    asteroids = new Asteroids(spriteSheetG, width + 100, width + 100, 0, height - 100, -180, 1000);
+    canisters = new Canisters(spriteSheetG, width + 50, width + 50, 0, height - 100, -180, 3000);
     timeline = new Timeline(spriteSheetG);
     score = 0;
     start = millis();
