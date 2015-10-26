@@ -62,12 +62,12 @@ public class Canister {
       hit = true;
   }
   
-  public boolean collectable(){
+  public boolean done(){
     if (frame == 8){
-      return false;
+      return true;
     }
     else{
-      return true;
+      return false;
     }
   }
 }

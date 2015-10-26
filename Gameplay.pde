@@ -2,6 +2,8 @@ public class Gameplay {
 
   public PImage spriteSheetG; 
   public PFont font;
+  private int timer;
+  private int startTime;
   private static final int SECONDS_TO_REACH_EARTH = 60;
   private Spaceship spaceship;
   private Background background;
@@ -13,6 +15,7 @@ public class Gameplay {
   private int start;
 
   public Gameplay(PImage sprites) {
+    startTime = millis()/1000;
     font = createFont("ARCADECLASSIC.TTF", 24);
     textFont(font);
     spriteSheetG = sprites;
@@ -32,6 +35,7 @@ public class Gameplay {
   }
 
   public void update() {
+    timer = startTime - millis()/1000;
     background.update();
     timeline.update();
     asteroids.update();
@@ -48,13 +52,14 @@ public class Gameplay {
   public void draw() {
 
     background.draw();
-    asteroids.draw();
-    canisters.draw();
-    spaceship.draw();
-    timeline.draw();
-
+    if(timer != 60){
+      asteroids.draw();
+      canisters.draw();
+      spaceship.draw();
+      timeline.draw();
     textSize(24);
     text("Score     " + score, 850, 75);
+    }
   }
 
   public void mousePressed() {
@@ -85,17 +90,15 @@ public class Gameplay {
       }
       //Otherwise, if it collided with the player, if so, remove it and reduce fuel
       if (collided(spaceship.x, spaceship.y, spaceship.sizeW - 50, spaceship.sizeH, asteroid.x - asteroid.sizeH / 2, asteroid.y - asteroid.sizeH / 2, asteroid.sizeW, asteroid.sizeH)) {
-        if(asteroid.damage()){
           spaceship.leakFuel();
           removedAsteroids.add(asteroid);
           spaceship.fuel.reduce();
-        }
       }
     }
 
     //Remove all asteroids that exited the screen or hit the player
     for (Asteroid asteroid : removedAsteroids) {
-      asteroids.asteroids.remove(asteroid);
+        asteroids.asteroids.remove(asteroid); 
     }
   }
 
@@ -128,7 +131,9 @@ public class Gameplay {
 
     //Remove all asteroids and bullets marked for deletion
     for (Asteroid asteroid : removedAsteroids) {
-//      asteroids.asteroids.remove(asteroid);
+      if(asteroid.done()){
+        asteroids.asteroids.remove(asteroid);
+      }
     }
     for (Bullet bullet : removedBullets) {
       spaceship.bullets.remove(bullet);
@@ -146,17 +151,15 @@ public class Gameplay {
         continue;
       }
       //Otherwise, if it collided with the player, if so, remove it and add fuel
-      if (collided(spaceship.x, spaceship.y, spaceship.sizeW - 50, spaceship.sizeH, canister.x - canister.sizeW / 2, canister.y - canister.sizeH / 2, canister.sizeW, canister.sizeH)) {
-        if(canister.collectable()){
+      if (collided(spaceship.x, spaceship.y, spaceship.sizeW - 50, spaceship.sizeH, canister.x - canister.sizeW / 2, canister.y - canister.sizeH / 2, canister.sizeW, canister.sizeH)){
           removedCanisters.add(canister);
           spaceship.fuel.increment();
-        }
       }
     }
 
     //Remove all canisters that exited the screen or hit the player
     for (Canister canister : removedCanisters) {
-      canisters.canisters.remove(canister);
+        canisters.canisters.remove(canister);
     }
   }
 
@@ -179,7 +182,9 @@ public class Gameplay {
     
     //Remove all canisters and bullets marked for deletion
     for (Canister canister : removedCanisters) {
-//           canisters.canisters.remove(canister);
+        if (canister.done()){
+           canisters.canisters.remove(canister);
+        }
     }
     for (Bullet bullet : removedBullets) {
       spaceship.bullets.remove(bullet);

@@ -39,6 +39,7 @@ public class Fuel {
       fuel = 100;
     }
   }
+  
 
   public void draw() {
     fill(241, 196, 15);

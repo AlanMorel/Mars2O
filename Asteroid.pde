@@ -47,7 +47,7 @@ public class Asteroid {
       setLarge();
     }
   }
-
+  
   public void setSmall() {
     sizeW = 127/2;
     sizeH =128/2;
@@ -127,14 +127,15 @@ public class Asteroid {
     }
   }
   
-  public boolean damage(){
+  public boolean done(){
     if (colFrame == 5){
-      return false;
-    }
-    else{
       return true;
     }
+    else{
+      return false;
+    }
   }
+  
   public void draw() {
     pushMatrix();
     translate(x, y);

@@ -142,9 +142,7 @@ public class Cutscene1 {
   
   //set trigger
   public void BoxTimer(){
-    timer = millis()/1000 - startTime;
-    println(timer);
-    
+    timer = millis()/1000 - startTime;    
     if(timer == 14){
       box.visible();
     }if(timer == 20){
