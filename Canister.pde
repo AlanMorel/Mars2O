@@ -63,7 +63,7 @@ public class Canister {
   }
   
   public boolean done(){
-    if (frame == 7){
+    if (frame == 8){
       return true;
     }
     else{
