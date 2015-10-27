@@ -85,9 +85,6 @@ public class Gameplay {
     if (asteroid.isSmall()) {
       score += 5;
     }
-//    else if (asteroid.isMedium()) {
-//      score += 25;
-//    } 
     else {
       score += 100;
     }

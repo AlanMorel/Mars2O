@@ -3,7 +3,6 @@ import ddf.minim.*;
 
 Minim minim;
 AudioPlayer shoot;
-AudioPlayer select;
 AudioPlayer get;
 AudioPlayer explode;
 AudioPlayer crumble;
@@ -35,7 +34,6 @@ void setup() {
   mission = minim.loadFile("mission.mp3");
   failsong = minim.loadFile("fail.mp3");
   winsong = minim.loadFile("win.mp3");
-  select = minim.loadFile("select.wav");
   hit = minim.loadFile("hit.wav");
   get = minim.loadFile("get.wav");
   crumble = minim.loadFile("crumble.wav");

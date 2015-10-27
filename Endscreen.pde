@@ -48,11 +48,6 @@ class Endscreen{
   }
   
   public void draw(){
-     if(play.displayX == 1 || exit.displayX == 1){
-      select.play();
-    }else{
-      select.rewind();
-    }
     space.draw();
     image(display, width/4, height/4);
     play.display();
