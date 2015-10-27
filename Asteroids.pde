@@ -18,7 +18,6 @@ public class Asteroids extends Spawner {
 
   public void draw() {
     textSize(24);
-    text("Asteroids   on   the   screen      " + asteroids.size(), 850, 100);
     for (Asteroid asteroid : asteroids) {
       asteroid.draw();
     }

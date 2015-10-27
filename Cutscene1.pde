@@ -186,6 +186,7 @@ public class Cutscene1 {
   }
 
   public void changeState() {
+      cutscene.pause();
       gameplay = new Gameplay(spriteSheet);
       status = Status.GAME_PLAY;
   }

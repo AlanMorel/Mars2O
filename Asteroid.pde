@@ -128,7 +128,7 @@ public class Asteroid {
   }
   
   public boolean done(){
-    if (colFrame == 5){
+    if (colFrame == 4){
       return true;
     }
     else{

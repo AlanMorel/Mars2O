@@ -13,6 +13,14 @@ public class Fuel {
   public int getFuelLeft() {
     return fuel;
   }
+  
+  public boolean noFuel(){
+    if (fuel == 0){
+      return true;
+    }else{
+      return false;
+    }
+  }
 
   public void increment() {
     fuel += 10;

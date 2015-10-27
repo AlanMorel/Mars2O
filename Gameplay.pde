@@ -10,6 +10,7 @@ public class Gameplay {
   private Asteroids asteroids;
   private Canisters canisters;
   private Timeline timeline;
+  private Endscreen testcreen;
 
   private int score;
   private int start;
@@ -26,6 +27,7 @@ public class Gameplay {
     timeline = new Timeline(spriteSheetG);
     score = 0;
     start = millis();
+    testscreen = new Endscreen();
   }
 
   //Returns a number between 0 to 1. 
@@ -47,6 +49,16 @@ public class Gameplay {
 
     playerCanisterCollisions();
     bulletCanisterCollisions();
+    if (spaceship.noFuel()){
+      testscreen.setStatus(1);
+      testscreen.setScore(score);
+      status = Status.ENDSCREEN;
+    }
+    if(getTripLeft()*190 > 191){
+      testscreen.setStatus(0);
+      testscreen.setScore(score);
+      status = Status.ENDSCREEN;
+    }
   }
 
   public void draw() {
@@ -63,7 +75,10 @@ public class Gameplay {
   }
 
   public void mousePressed() {
+    shoot.play();
     spaceship.mousePressed();
+    shoot.cue(0);
+       
   }
 
   public void addScore(Asteroid asteroid) {
@@ -91,6 +106,8 @@ public class Gameplay {
       //Otherwise, if it collided with the player, if so, remove it and reduce fuel
       if (collided(spaceship.x, spaceship.y, spaceship.sizeW - 50, spaceship.sizeH, asteroid.x - asteroid.sizeH / 2, asteroid.y - asteroid.sizeH / 2, asteroid.sizeW, asteroid.sizeH)) {
           spaceship.leakFuel();
+          hit.rewind();
+          hit.play();
           removedAsteroids.add(asteroid);
           spaceship.fuel.reduce();
       }
@@ -117,6 +134,8 @@ public class Gameplay {
         //Otheriwse, if a bullet and asteroid collided, remove both and increment score
         if (collided(bullet.x, bullet.y, bullet.sizeW - 30, bullet.sizeH - 30, asteroid.x - asteroid.sizeW / 2, asteroid.y - asteroid.sizeH / 2, asteroid.sizeW, asteroid.sizeH)) {
           removedBullets.add(bullet);
+          crumble.rewind();
+          crumble.play();
           if (asteroid.isDestroyed()) {
             asteroid.hit();
             gameplay.addScore(asteroid);
@@ -153,6 +172,8 @@ public class Gameplay {
       //Otherwise, if it collided with the player, if so, remove it and add fuel
       if (collided(spaceship.x, spaceship.y, spaceship.sizeW - 50, spaceship.sizeH, canister.x - canister.sizeW / 2, canister.y - canister.sizeH / 2, canister.sizeW, canister.sizeH)){
           removedCanisters.add(canister);
+          get.rewind();
+          get.play();
           spaceship.fuel.increment();
       }
     }
@@ -176,6 +197,7 @@ public class Gameplay {
           removedBullets.add(bullet);
           canister.hit();
           removedCanisters.add(canister);
+          explode.play();
         }
       }
     }
@@ -184,6 +206,7 @@ public class Gameplay {
     for (Canister canister : removedCanisters) {
         if (canister.done()){
            canisters.canisters.remove(canister);
+           explode.cue(0);
         }
     }
     for (Bullet bullet : removedBullets) {

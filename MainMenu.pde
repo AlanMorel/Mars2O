@@ -52,11 +52,15 @@ public class MainMenu {
     mars.update();
     asteroids.update();
     shootingStar.update();
+    if(play.displayX == 1 || exit.displayX == 1){
+      select.play();
+    }else{
+      select.cue(0);
+    }
   }
 
   public void changeState() {
     if (play.clicked()){
-//      gameplay = new Gameplay();
       cutscene_1 = new Cutscene1(spriteSheet, menuItems);
       status = Status.CUTSCENE_1;
     }

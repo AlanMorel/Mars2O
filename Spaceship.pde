@@ -81,6 +81,13 @@ public class Spaceship {
     }
   }
   
+  public boolean noFuel(){
+    if (fuel.noFuel()){
+      return true;
+    }else{
+      return false;
+    }
+  }
   
   public void moveUp() {
     y -= speed;
@@ -116,7 +123,6 @@ public class Spaceship {
 
   public void draw() {
     textSize(24);
-    text("Bullets   on   the   screen      " + bullets.size(), 850, 125);
     pushMatrix();
     translate(x,y);
     image(art, 0, 0, sizeW, sizeH);

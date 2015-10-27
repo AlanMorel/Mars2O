@@ -44,12 +44,15 @@ public class Line{
           frame.display();
         }
           if(spacer == 1){
+            textscrol.play();
             i++;
+            textscrol.cue(0);
             spacer = 0;
           }
       }
       else{
          for(Tsquare frame : chars){
+          textscrol.pause();
           frame.display();
         }
       }
