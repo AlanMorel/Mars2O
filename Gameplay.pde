@@ -69,8 +69,8 @@ public class Gameplay {
       canisters.draw();
       spaceship.draw();
       timeline.draw();
-    textSize(24);
-    text("Score     " + score, 850, 75);
+    textSize(40);
+    text("Score     " + score, 975, 50);
     }
   }
 
@@ -122,6 +122,10 @@ public class Gameplay {
     ArrayList<Bullet> removedBullets = new ArrayList<Bullet>();
 
     for (Asteroid asteroid : asteroids.asteroids) {
+       if(asteroid.done()){
+         removedAsteroids.add(asteroid);
+         continue;
+       }
       for (Bullet bullet : spaceship.bullets) {
         //If the bullet has exited the screen, remove it and move on
         if (bullet.x > width) {
@@ -136,7 +140,7 @@ public class Gameplay {
           if (asteroid.isDestroyed()) {
             asteroid.hit();
             gameplay.addScore(asteroid);
-            removedAsteroids.add(asteroid);
+           // removedAsteroids.add(asteroid);
           }
           else{
             asteroid.hitBig();
@@ -147,9 +151,7 @@ public class Gameplay {
 
     //Remove all asteroids and bullets marked for deletion
     for (Asteroid asteroid : removedAsteroids) {
-      if(asteroid.done()){
         asteroids.asteroids.remove(asteroid);
-      }
     }
     for (Bullet bullet : removedBullets) {
       spaceship.bullets.remove(bullet);
@@ -188,23 +190,27 @@ public class Gameplay {
     long tried = 0;
     long waitThresh = 3000;
     for (Canister canister : canisters.canisters) {
+       if (canister.done()){
+          removedCanisters.add(canister);
+          explode.rewind();
+          explode.play();
+          continue;
+       }
       for (Bullet bullet : spaceship.bullets) {
         //Otheriwse, if a bullet and canister collided, remove both and increment score
         if (collided(bullet.x, bullet.y, bullet.sizeW - 30, bullet.sizeH - 30, canister.x - canister.sizeW / 2, canister.y - canister.sizeH / 2, canister.sizeW, canister.sizeH)) {
           removedBullets.add(bullet);
           canister.hit();
-          removedCanisters.add(canister);
-          explode.play();
+          //removedCanisters.add(canister);
+         // explode.play();
         }
       }
     }
     
     //Remove all canisters and bullets marked for deletion
     for (Canister canister : removedCanisters) {
-        if (canister.done()){
            canisters.canisters.remove(canister);
-           explode.cue(0);
-        }
+           //explode.cue(0);
     }
     for (Bullet bullet : removedBullets) {
       spaceship.bullets.remove(bullet);

@@ -52,8 +52,8 @@ class Endscreen{
     image(display, width/4, height/4);
     play.display();
     exit.display();
-    textSize(32);
-    text("Score         "  + score, width/4, height/2);
+    textSize(48);
+    text("Score     "  + score, width/4 + 10, height/2 - 40);
   }
   
 }
