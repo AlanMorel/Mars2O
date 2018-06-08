@@ -5,9 +5,9 @@
 * [Processing](https://processing.org/reference/libraries/) - visual arts software
 
 ## Screenshots
-![alt tag](http://i.imgur.com/90CIfi5.png)
-![alt tag](http://i.imgur.com/OnzVfU9.png)
-![alt tag](http://i.imgur.com/iFwVCdl.png)
+![alt tag](https://i.imgur.com/90CIfi5.png)
+![alt tag](https://i.imgur.com/OnzVfU9.png)
+![alt tag](https://i.imgur.com/iFwVCdl.png)
 
 ## License
 **Mars2O** is licensed under the [MIT license](LICENSE).
